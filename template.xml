@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<template
+        format="5"
+        revision="5"
+        name="Custom Bottom Navigation Activity"
+        description="Bottom Navigation Activity With Lazy Load Fragments"
+        minApi="9"
+        minBuildApi="9"
+        category="Activity">
+
+    <dependency name="android-support-v4" revision="8"/>
+
+    <category value="Activity"/>
+    <formfactor value="Mobile"/>
+
+    <parameter
+            id="instantAppActivityHost"
+            name="Instant App URL Host"
+            type="string"
+            suggest="${companyDomain}"
+            default="instantapp.example.com"
+            visibility="isInstantApp!false"
+            help="The domain to use in the Instant App route for this activity"/>
+
+    <parameter
+            id="instantAppActivityRouteType"
+            name="Instant App URL Route Type"
+            type="enum"
+            default="pathPattern"
+            visibility="isInstantApp!false"
+            help="The type of route to use in the Instant App route for this activity" >
+            <option id="path">Path</option>
+            <option id="pathPrefix">Path Prefix</option>
+            <option id="pathPattern">Path Pattern</option>
+    </parameter>
+
+    <parameter
+            id="instantAppActivityRoute"
+            name="Instant App URL Route"
+            type="string"
+            default="/.*"
+            visibility="isInstantApp!false"
+            help="The route to use in the Instant App route for this activity"/>
+    <!-- Activity Name -->
+    <parameter
+            id="activityClass"
+            name="Activity Name"
+            type="string"
+            constraints="class|unique|nonempty"
+            suggest="${layoutToActivity(activityLayoutName)}"
+            default="TemplateActivity"
+            help="The name of the activity class to create"/>
+
+    <!-- Layout Name -->
+    <parameter
+            id="activityLayoutName"
+            name="Activity Layout Name"
+            type="string"
+            constraints="layout|unique|nonempty"
+            suggest="${activityToLayout(activityClass)}"
+            default="activity_template"
+            help="The name of the layout to create for the activity"/>
+
+    <!-- Fragment Class -->
+    <!-- <parameter
+            id="fragmentClass"
+            name="Fragment Name"
+            type="string"
+            constraints="class|unique|nonempty"
+            suggest="${layoutToFragment(fragmentLayoutName)}"
+            default="TemplateFragment"
+            help="The name of the fragment class to create"/> -->
+
+    <!-- Fragment Layout -->
+    <parameter
+            id="fragmentLayoutName"
+            name="Fragment Layout Name"
+            type="string"
+            constraints="layout|unique|nonempty"
+            suggest="${activityToLayout(activityClass, 'fragment')}"
+            default="fragment_main"
+            visibility="false"
+            help="The name of the layout to create for the activity's content fragment"/>
+
+    <!-- Title -->
+    <parameter
+            id="activityTitle"
+            name="Title"
+            type="string"
+            constraints="nonempty"
+            default="TemplateActivity"
+            suggest="${activityClass}"
+            help="The name of the activity. For launcher activities, the application title."/>
+
+    <!-- Parent Activity -->
+    <parameter
+            id="parentActivityClass"
+            name="Hierarchical Parent"
+            type="string"
+            constraints="activity|exists|empty"
+            default=""
+            help="The hierarchical parent activity, used to provide a default implementation for the 'Up' button"/>
+
+    <!-- Package Name -->
+    <parameter
+            id="packageName"
+            name="Package name"
+            type="string"
+            constraints="package"
+            default="com.mycompany.myapp"/>
+
+    <!-- 128x128 thumbnails relative to template.xml -->
+    <thumbs>
+        <!-- default thumbnail is required -->
+        <thumb>template_bottom_navigation_activity.png</thumb>
+    </thumbs>
+
+    <globals file="globals.xml.ftl"/>
+    <execute file="recipe.xml.ftl"/>
+
+</template>
