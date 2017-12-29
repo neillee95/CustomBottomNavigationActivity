@@ -1,0 +1,2 @@
+# CustomBottomNavigationActivity
+Android Activity Template
