@@ -33,6 +33,7 @@ class ${fragmentClass} : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.${fragmentLayoutName}, container, false)
         mViewPager = content.findViewById(R.id.viewpager)
+        mViewPager!!.offscreenPageLimit = 3
         mViewPager!!.adapter = ${pagerAdapterClass}(fragmentManager)
         val navigationView = content.findViewById<BottomNavigationView>(R.id.navigation)
         navigationView.setOnNavigationItemSelectedListener(mNavigationListener)
