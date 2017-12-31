@@ -65,6 +65,7 @@ public class ${fragmentClass} extends Fragment {
         View content = inflater.inflate(R.layout.${fragmentLayoutName}, container, false);
         mViewPager = content.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new ${pagerAdapterClass}(getFragmentManager()));
+        mViewPager.setOffscreenPageLimit(3);
         BottomNavigationView navigationView = content.findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(mNavigationListener);
         return content;
